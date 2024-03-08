@@ -49,24 +49,24 @@ int main(int argc, char* argv[]) {
 
 	std::vector<std::thread> add_task_threads(10);
 	for (int i = 0; i < add_task_threads.size(); ++i) {
-		//add_task_threads[i] = std::thread([&tp] {
+		add_task_threads[i] = std::thread([&tp] {
 			tp.add_task(foo);
-		//});
+		});
 	}
 
-	//std::this_thread::sleep_for(seconds(30));
-	//for (int i = 0; i < 5; ++i) {
-	//	tp.add_task(foo);
-	//}
-	//
-	//std::this_thread::sleep_for(seconds(15));
-	//for (int i = 0; i < 10; ++i) {
-	//	tp.add_task(foo);
-	//}
-	std::this_thread::sleep_for(seconds(15));
-	tp.terminate(true);
+	std::this_thread::sleep_for(seconds(30));
+	for (int i = 0; i < 5; ++i) {
+		tp.add_task(foo);
+	}
 	
-	//std::for_each(add_task_threads.begin(), add_task_threads.end(), std::mem_fn(&std::thread::join));
+	std::this_thread::sleep_for(seconds(15));
+	for (int i = 0; i < 10; ++i) {
+		tp.add_task(foo);
+	}
+	std::this_thread::sleep_for(seconds(30));
+	tp.terminate();
+	
+	std::for_each(add_task_threads.begin(), add_task_threads.end(), std::mem_fn(&std::thread::join));
 
 	std::cout << "\nreturn main()\n";
 
