@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 	std::mt19937 rand_gen{ rand_device() };
 	std::uniform_int_distribution<myType> uni_dist(std::numeric_limits<myType>::min(), std::numeric_limits<myType>::max() / elem_num);
 
-	constexpr std::size_t vec_size = 100'000'000;
+	constexpr std::size_t vec_size = 10'000'000;
 	std::vector<myType> vec(vec_size);
 
 	const std::size_t thread_count = std::thread::hardware_concurrency();
